@@ -10,18 +10,39 @@ class Mini extends Phaser.Scene {
             this.target1.x = 1532
             this.target1.y = 800
         this.physics.moveToObject(obj,this.target1,600);
+        this.tweens.add({
+            targets: obj,
+            alpha: { from: 1, to: 0 },
+            yoyo: true,
+            duration: 600,
+            repeat: -1,
+        });
     }
     path2(obj){
         this.target2 = new Phaser.Math.Vector2();
             this.target2.x = 429
             this.target2.y = 850
         this.physics.moveToObject(obj,this.target2,300);
+        this.tweens.add({
+            targets: obj,
+            alpha: { from: 1, to: 0 },
+            yoyo: true,
+            duration: 900,
+            repeat: -1,
+        });
     }
     path3(obj){
         this.target3 = new Phaser.Math.Vector2();
             this.target3.x = 710
             this.target3.y = 1500
         this.physics.moveToObject(obj,this.target3,450);
+        this.tweens.add({
+            targets: obj,
+            alpha: { from: 1, to: 0 },
+            yoyo: true,
+            duration: 1500,
+            repeat: -1,
+        });
     }
     create(){
         this.pointcount = this.add.text(0,0)
@@ -33,13 +54,6 @@ class Mini extends Phaser.Scene {
             .setScale(0.1)
             .setBounce(1, 1)
             .setCollideWorldBounds(true)
-            this.tweens.add({
-                targets: this.coin1,
-                alpha: { from: 1, to: 0 },
-                yoyo: true,
-                duration: 1000,
-                repeat: -1,
-            })
             .on('pointerdown', () => {
                 this.tweens.add({
                     targets: this.coin1,
@@ -55,13 +69,6 @@ class Mini extends Phaser.Scene {
             .setScale(0.25)
             .setBounce(1, 1)
             .setCollideWorldBounds(true)
-            this.tweens.add({
-                targets: this.coin2,
-                alpha: { from: 1, to: 0 },
-                yoyo: true,
-                duration: 2000,
-                repeat: -1,
-            })
             .on('pointerdown', () => {
                 this.tweens.add({
                     targets: this.coin2,
@@ -77,13 +84,6 @@ class Mini extends Phaser.Scene {
             .setScale(0.5)
             .setBounce(1, 1)
             .setCollideWorldBounds(true)
-            this.tweens.add({
-                targets: this.coin3,
-                alpha: { from: 1, to: 0 },
-                yoyo: true,
-                duration: 600,
-                repeat: -1,
-            })
             .on('pointerdown', () => {
                 this.tweens.add({
                     targets: this.coin3,
@@ -99,13 +99,6 @@ class Mini extends Phaser.Scene {
             .setScale(0.125)
             .setBounce(1, 1)
             .setCollideWorldBounds(true)
-            this.tweens.add({
-                targets: this.coin4,
-                alpha: { from: 1, to: 0 },
-                yoyo: true,
-                duration: 900,
-                repeat: -1,
-            })
             .on('pointerdown', () => {
                 this.tweens.add({
                     targets: this.coin4,
@@ -121,13 +114,6 @@ class Mini extends Phaser.Scene {
             .setScale(0.4)
             .setBounce(1, 1)
             .setCollideWorldBounds(true)
-            this.tweens.add({
-                targets: this.coin5,
-                alpha: { from: 1, to: 0 },
-                yoyo: true,
-                duration: 1200,
-                repeat: -1,
-            })
             .on('pointerdown', () => {
                 this.tweens.add({
                     targets: this.coin5,
@@ -143,13 +129,6 @@ class Mini extends Phaser.Scene {
             .setScale(0.34)
             .setBounce(1, 1)
             .setCollideWorldBounds(true)
-            this.tweens.add({
-                targets: this.coin6,
-                alpha: { from: 1, to: 0 },
-                yoyo: true,
-                duration: 400,
-                repeat: -1,
-            })
             .on('pointerdown', () => {
                 this.tweens.add({
                     targets: this.coin6,
@@ -165,13 +144,6 @@ class Mini extends Phaser.Scene {
             .setScale(0.6)
             .setBounce(1, 1)
             .setCollideWorldBounds(true)
-            this.tweens.add({
-                targets: this.coin7,
-                alpha: { from: 1, to: 0 },
-                yoyo: true,
-                duration: 2000,
-                repeat: -1,
-            })
             .on('pointerdown', () => {
                 this.tweens.add({
                     targets: this.coin7,
@@ -187,13 +159,6 @@ class Mini extends Phaser.Scene {
             .setScale(0.43)
             .setBounce(1, 1)
             .setCollideWorldBounds(true)
-            this.tweens.add({
-                targets: this.coin8,
-                alpha: { from: 1, to: 0 },
-                yoyo: true,
-                duration: 2000,
-                repeat: -1,
-            })
             .on('pointerdown', () => {
                 this.tweens.add({
                     targets: this.coin8,
@@ -209,13 +174,6 @@ class Mini extends Phaser.Scene {
             .setScale(0.32)
             .setBounce(1, 1)
             .setCollideWorldBounds(true)
-            this.tweens.add({
-                targets: this.coin9,
-                alpha: { from: 1, to: 0 },
-                yoyo: true,
-                duration: 400,
-                repeat: -1,
-            })
             .on('pointerdown', () => {
                 this.tweens.add({
                     targets: this.coin9,
@@ -231,13 +189,6 @@ class Mini extends Phaser.Scene {
             .setScale(0.23)
             .setBounce(1, 1)
             .setCollideWorldBounds(true)
-            this.tweens.add({
-                targets: this.coin10,
-                alpha: { from: 1, to: 0 },
-                yoyo: true,
-                duration: 500,
-                repeat: -1,
-            })
             .on('pointerdown', () => {
                 this.tweens.add({
                     targets: this.coin10,
@@ -253,13 +204,6 @@ class Mini extends Phaser.Scene {
             .setScale(0.22)
             .setBounce(1, 1)
             .setCollideWorldBounds(true)
-            this.tweens.add({
-                targets: this.coin11,
-                alpha: { from: 1, to: 0 },
-                yoyo: true,
-                duration: 600,
-                repeat: -1,
-            })
             .on('pointerdown', () => {
                 this.tweens.add({
                     targets: this.coin11,
@@ -275,13 +219,6 @@ class Mini extends Phaser.Scene {
             .setScale(0.125)
             .setBounce(1, 1)
             .setCollideWorldBounds(true)
-            this.tweens.add({
-                targets: this.coin12,
-                alpha: { from: 1, to: 0 },
-                yoyo: true,
-                duration: 900,
-                repeat: -1,
-            })
             .on('pointerdown', () => {
                 this.tweens.add({
                     targets: this.coin12,
@@ -297,13 +234,6 @@ class Mini extends Phaser.Scene {
             .setScale(0.22)
             .setBounce(1, 1)
             .setCollideWorldBounds(true)
-            this.tweens.add({
-                targets: this.coin13,
-                alpha: { from: 1, to: 0 },
-                yoyo: true,
-                duration: 600,
-                repeat: -1,
-            })
             .on('pointerdown', () => {
                 this.tweens.add({
                     targets: this.coin13,
@@ -319,13 +249,6 @@ class Mini extends Phaser.Scene {
             .setScale(0.095)
             .setBounce(1, 1)
             .setCollideWorldBounds(true)
-            this.tweens.add({
-                targets: this.coin14,
-                alpha: { from: 1, to: 0 },
-                yoyo: true,
-                duration: 900,
-                repeat: -1,
-            })
             .on('pointerdown', () => {
                 this.tweens.add({
                     targets: this.coin14,
@@ -341,13 +264,6 @@ class Mini extends Phaser.Scene {
             .setScale(0.095)
             .setBounce(1, 1)
             .setCollideWorldBounds(true)
-            this.tweens.add({
-                targets: this.coin15,
-                alpha: { from: 1, to: 0 },
-                yoyo: true,
-                duration: 900,
-                repeat: -1,
-            })
             .on('pointerdown', () => {
                 this.tweens.add({
                     targets: this.coin15,
