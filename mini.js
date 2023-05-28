@@ -375,6 +375,7 @@ class Mini extends Phaser.Scene {
         this.path3(this.coin15);
     }
     update(){
+        //test
         this.pointcount.setText(this.points);
     }
 }
