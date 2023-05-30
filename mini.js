@@ -52,6 +52,17 @@ class Mini extends Phaser.Scene {
             repeat: -1,
         });
     }
+    shake(obj) {
+        this.tweens.add({
+            targets: obj,
+            x: { from: obj.x, to: obj.x + (Math.random() * 5 - 200) },
+            y: { from: obj.y, to: obj.y + (Math.random() * 5 - 200) },
+            duration: 500,
+            yoyo: true,
+            repeat: 5,
+            onComplete: () => obj.setAlpha(0)
+        })
+    }
     create(){
         this.dmg = this.sound.add("dmg");
         this.catch = this.sound.add("catch");
@@ -252,6 +263,7 @@ class Mini extends Phaser.Scene {
                     onComplete: () => this.coin11.destroy()
                 })
                 this.dmg.play();
+                this.cameras.main.shake(300)
                 this.health--;
             })
         this.coin12 = this.physics.add.image(300,1080,"coinb")
@@ -268,6 +280,7 @@ class Mini extends Phaser.Scene {
                     onComplete: () => this.coin12.destroy()
                 })
                 this.dmg.play();
+                this.cameras.main.shake(300)
                 this.health--;
             })
         this.coin13 = this.physics.add.image(0,900,"coinb")
@@ -284,6 +297,7 @@ class Mini extends Phaser.Scene {
                     onComplete: () => this.coin13.destroy()
                 })
                 this.dmg.play();
+                this.cameras.main.shake(300)
                 this.health--;
             })
         this.coin14 = this.physics.add.image(1239,10,"coinb")
@@ -300,6 +314,7 @@ class Mini extends Phaser.Scene {
                     onComplete: () => this.coin14.destroy()
                 })
                 this.dmg.play();
+                this.cameras.main.shake(300)
                 this.health--;
             })
         this.coin15 = this.physics.add.image(30,230,"coinb")
@@ -316,6 +331,7 @@ class Mini extends Phaser.Scene {
                     onComplete: () => this.coin15.destroy()
                 })
                 this.dmg.play();
+                this.cameras.main.shake(300)
                 this.health--;
             })
         this.path1(this.coin1);
@@ -336,16 +352,18 @@ class Mini extends Phaser.Scene {
     }
     update(){
         if (this.health == 3) {
-            this.sh1.setAlpha(0);
+            this.shake(this.sh1);
             this.sh1.destroy();
             this.sh2.setAlpha(1);
         }
         if (this.health == 2) {
+            this.shake(this.sh2);
             this.sh2.setAlpha(0);
             this.sh2.destroy();
             this.sh3.setAlpha(1);
         }
         if (this.health == 1) {
+            this.shake(this.sh3);
             this.sh3.setAlpha(0);
             this.sh3.destroy();
             this.sh4.setAlpha(1);
