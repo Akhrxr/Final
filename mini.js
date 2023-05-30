@@ -3,7 +3,14 @@ class Mini extends Phaser.Scene {
         super('mini');
     }
     preload() {
-        this.load.image('coin', 'assets/coin.png');
+        this.load.image('coin', 'assets/slug.png');
+        this.load.image('bg','assets/background.png');
+        this.load.image('sh1','assets/shfull.png');
+        this.load.image('sh2','assets/sh2.png');
+        this.load.image('sh3','assets/sh3.png');
+        this.load.image('sh4','assets/shno.png');
+        this.load.image('coinb','assets/badslug.png');
+        this.load.audio('dmg','assets/damage.wav');
     }
     path1(obj){
         this.target1 = new Phaser.Math.Vector2();
@@ -12,7 +19,7 @@ class Mini extends Phaser.Scene {
         this.physics.moveToObject(obj,this.target1,600);
         this.tweens.add({
             targets: obj,
-            alpha: { from: 1, to: 0 },
+            alpha: { from: 0.5, to: 0 },
             yoyo: true,
             duration: 600,
             repeat: -1,
@@ -25,7 +32,7 @@ class Mini extends Phaser.Scene {
         this.physics.moveToObject(obj,this.target2,300);
         this.tweens.add({
             targets: obj,
-            alpha: { from: 1, to: 0 },
+            alpha: { from: 0.5, to: 0 },
             yoyo: true,
             duration: 900,
             repeat: -1,
@@ -38,17 +45,37 @@ class Mini extends Phaser.Scene {
         this.physics.moveToObject(obj,this.target3,450);
         this.tweens.add({
             targets: obj,
-            alpha: { from: 1, to: 0 },
+            alpha: { from: 0.5, to: 0 },
             yoyo: true,
             duration: 1500,
             repeat: -1,
         });
     }
     create(){
+        this.dmg = this.sound.add("dmg");
+        this.cameras.main.fadeIn(1000, 0, 0, 0);
+        this.bbg = this.add.image(0,0,'bg')
+        this.bbg.displayHeight = this.sys.game.config.height;
+        this.bbg.scaleX = this.bbg.scaleY;
+        this.bbg.x = this.sys.game.config.width/2;
+        this.bbg.y = this.sys.game.config.height/2;
+        //ADD CONDITION FOR FAKE COINS, IF CLICKED YOU LOSE AND HAVE TO RESTART
         this.pointcount = this.add.text(0,0)
             .setStyle({ fontSize: 200, color: '#fff' })
         this.points = 0;
-        this.cameras.main.setBackgroundColor('#444');
+        this.health = 4;
+        this.sh1 = this.add.image(1800,120,'sh1')
+            this.sh1.setScale(0.25)
+            this.sh1.setAlpha(1)
+        this.sh2 = this.add.image(1800,120,'sh2')
+            this.sh2.setScale(0.25)
+            this.sh2.setAlpha(0)
+        this.sh3 = this.add.image(1800,120,'sh3')
+            this.sh3.setScale(0.25)
+            this.sh3.setAlpha(0)
+        this.sh4 = this.add.image(1800,120,'sh4')
+            this.sh4.setScale(0.25)
+            this.sh4.setAlpha(0)
         this.coin1 = this.physics.add.image(400,200,"coin")
             .setInteractive({useHandCursor:true})
             .setScale(0.1)
@@ -59,7 +86,7 @@ class Mini extends Phaser.Scene {
                     targets: this.coin1,
                     y: `-=${2 * this.s}`,
                     alpha: { from: 1, to: 0 },
-                    duration: 500,
+                    duration: 750,
                     onComplete: () => this.coin1.destroy()
                 })
                 this.points++;
@@ -74,7 +101,7 @@ class Mini extends Phaser.Scene {
                     targets: this.coin2,
                     y: `-=${2 * this.s}`,
                     alpha: { from: 1, to: 0 },
-                    duration: 500,
+                    duration: 750,
                     onComplete: () => this.coin2.destroy()
                 })
                 this.points++;
@@ -89,7 +116,7 @@ class Mini extends Phaser.Scene {
                     targets: this.coin3,
                     y: `-=${2 * this.s}`,
                     alpha: { from: 1, to: 0 },
-                    duration: 500,
+                    duration: 750,
                     onComplete: () => this.coin3.destroy()
                 })
                 this.points++;
@@ -104,7 +131,7 @@ class Mini extends Phaser.Scene {
                     targets: this.coin4,
                     y: `-=${2 * this.s}`,
                     alpha: { from: 1, to: 0 },
-                    duration: 500,
+                    duration: 750,
                     onComplete: () => this.coin4.destroy()
                 })
                 this.points++;
@@ -119,7 +146,7 @@ class Mini extends Phaser.Scene {
                     targets: this.coin5,
                     y: `-=${2 * this.s}`,
                     alpha: { from: 1, to: 0 },
-                    duration: 500,
+                    duration: 750,
                     onComplete: () => this.coin5.destroy()
                 })
                 this.points++;
@@ -134,7 +161,7 @@ class Mini extends Phaser.Scene {
                     targets: this.coin6,
                     y: `-=${2 * this.s}`,
                     alpha: { from: 1, to: 0 },
-                    duration: 500,
+                    duration: 750,
                     onComplete: () => this.coin6.destroy()
                 })
                 this.points++;
@@ -149,7 +176,7 @@ class Mini extends Phaser.Scene {
                     targets: this.coin7,
                     y: `-=${2 * this.s}`,
                     alpha: { from: 1, to: 0 },
-                    duration: 500,
+                    duration: 750,
                     onComplete: () => this.coin7.destroy()
                 })
                 this.points++;
@@ -164,7 +191,7 @@ class Mini extends Phaser.Scene {
                     targets: this.coin8,
                     y: `-=${2 * this.s}`,
                     alpha: { from: 1, to: 0 },
-                    duration: 500,
+                    duration: 750,
                     onComplete: () => this.coin8.destroy()
                 })
                 this.points++;
@@ -194,12 +221,12 @@ class Mini extends Phaser.Scene {
                     targets: this.coin10,
                     y: `-=${2 * this.s}`,
                     alpha: { from: 1, to: 0 },
-                    duration: 500,
+                    duration: 750,
                     onComplete: () => this.coin10.destroy()
                 })
                 this.points++;
             })
-        this.coin11 = this.physics.add.image(1300,430,"coin")
+        this.coin11 = this.physics.add.image(1300,430,"coinb")
             .setInteractive({useHandCursor:true})
             .setScale(0.22)
             .setBounce(1, 1)
@@ -209,12 +236,13 @@ class Mini extends Phaser.Scene {
                     targets: this.coin11,
                     y: `-=${2 * this.s}`,
                     alpha: { from: 1, to: 0 },
-                    duration: 500,
-                    onComplete: () => this.coin3.destroy()
+                    duration: 750,
+                    onComplete: () => this.coin11.destroy()
                 })
-                this.points++;
+                this.dmg.play();
+                this.health--;
             })
-        this.coin12 = this.physics.add.image(300,1080,"coin")
+        this.coin12 = this.physics.add.image(300,1080,"coinb")
             .setInteractive({useHandCursor:true})
             .setScale(0.125)
             .setBounce(1, 1)
@@ -224,12 +252,13 @@ class Mini extends Phaser.Scene {
                     targets: this.coin12,
                     y: `-=${2 * this.s}`,
                     alpha: { from: 1, to: 0 },
-                    duration: 500,
-                    onComplete: () => this.coin4.destroy()
+                    duration: 750,
+                    onComplete: () => this.coin12.destroy()
                 })
-                this.points++;
+                this.dmg.play();
+                this.health--;
             })
-        this.coin13 = this.physics.add.image(0,900,"coin")
+        this.coin13 = this.physics.add.image(0,900,"coinb")
             .setInteractive({useHandCursor:true})
             .setScale(0.22)
             .setBounce(1, 1)
@@ -239,12 +268,13 @@ class Mini extends Phaser.Scene {
                     targets: this.coin13,
                     y: `-=${2 * this.s}`,
                     alpha: { from: 1, to: 0 },
-                    duration: 500,
-                    onComplete: () => this.coin3.destroy()
+                    duration: 750,
+                    onComplete: () => this.coin13.destroy()
                 })
-                this.points++;
+                this.dmg.play();
+                this.health--;
             })
-        this.coin14 = this.physics.add.image(1239,10,"coin")
+        this.coin14 = this.physics.add.image(1239,10,"coinb")
             .setInteractive({useHandCursor:true})
             .setScale(0.095)
             .setBounce(1, 1)
@@ -254,12 +284,13 @@ class Mini extends Phaser.Scene {
                     targets: this.coin14,
                     y: `-=${2 * this.s}`,
                     alpha: { from: 1, to: 0 },
-                    duration: 500,
-                    onComplete: () => this.coin4.destroy()
+                    duration: 750,
+                    onComplete: () => this.coin14.destroy()
                 })
-                this.points++;
+                this.dmg.play();
+                this.health--;
             })
-        this.coin15 = this.physics.add.image(30,230,"coin")
+        this.coin15 = this.physics.add.image(30,230,"coinb")
             .setInteractive({useHandCursor:true})
             .setScale(0.095)
             .setBounce(1, 1)
@@ -269,10 +300,11 @@ class Mini extends Phaser.Scene {
                     targets: this.coin15,
                     y: `-=${2 * this.s}`,
                     alpha: { from: 1, to: 0 },
-                    duration: 500,
-                    onComplete: () => this.coin4.destroy()
+                    duration: 750,
+                    onComplete: () => this.coin15.destroy()
                 })
-                this.points++;
+                this.dmg.play();
+                this.health--;
             })
         this.path1(this.coin1);
         this.path2(this.coin3);
@@ -291,10 +323,48 @@ class Mini extends Phaser.Scene {
         this.path3(this.coin15);
     }
     update(){
-        //test
+        if (this.health == 3) {
+            this.sh1.setAlpha(0);
+            this.sh1.destroy();
+            this.sh2.setAlpha(1);
+        }
+        if (this.health == 2) {
+            this.sh2.setAlpha(0);
+            this.sh2.destroy();
+            this.sh3.setAlpha(1);
+        }
+        if (this.health == 1) {
+            this.sh3.setAlpha(0);
+            this.sh3.destroy();
+            this.sh4.setAlpha(1);
+        }
+        if (this.health == 0) {
+            this.cameras.main.fade(1000, 0,0,0);
+            this.time.delayedCall(1000, () =>this.scene.start('fail'));
+        }
+        console.log(this.health)
         this.pointcount.setText(this.points);
     }
 }
+class Fail extends Phaser.Scene {
+    constructor() {
+        super('fail');
+    }
+    preload(){
+        this.load.image('fail', 'assets/coin.png');
+        this.load.image('tryagain','assets/testt.png')
+    }
+    create() {
+        this.cameras.main.fadeIn(1000, 0, 0, 0);
+        this.add.image(1920/2,1080/2,'fail');
+        this.add.image(1920/2,650,'tryagain');
+        this.input.on('pointerdown', () => {
+            this.cameras.main.fade(1000, 0,0,0);
+            this.time.delayedCall(1000, () => this.scene.start('mini'));
+        });
+    }
+}
+
 
 //Click at the right time game
 const game = new Phaser.Game({
@@ -304,7 +374,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [Mini],
+    scene: [Mini,Fail],
     title: "Minigamee",
     physics: {
         default: 'arcade',
